@@ -67,7 +67,7 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
-    delivery_addresses: ['laurette.gruand@webhelpmedica.com']
+    delivery_addresses: ['test@test.com']
 
 fos_user:
     from_email:

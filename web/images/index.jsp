@@ -22,17 +22,6 @@
 	</div>
 
 
-
-	<!-- div style="float: left">
-		<img alt="Directmedica" style="width: 190px; height: 35px"
-			src="image/logoDM.jpg">
-	</div>
-	<div style="float: right">
-		<img alt="Formation Ã  distance" style="width: 230px; height: 35px"
-			src="image/logoFD.png">
-	</div-->
-
-
    <div align="center">
 		<ul id="menu">
 		        <li><a href="index.jsp">Accueil</a></li>
@@ -96,12 +85,12 @@
 			<div id="footer">
 				<div class="footer_box" style="text-align: left; width: 50%;">
 					<a style="color: #49639B; font-size: 12px;"
-						onclick="alert( 'Cette plateforme de formation &agrave; distance respecte les principes &eacute;nonc&eacute;s dans la loi n&deg; 2004-575 du 21 juin 2004, relative &agrave; la confiance dans l&acute;&eacute;conomie num&eacute;rique. Conform&eacute;ment &agrave; la loi &laquo; informatique et libert&eacute;s &raquo; du 6 janvier 1978 modifi&eacute;e en 2004, vous b&eacute;n&eacute;ficiez d&acute;un droit d&acute;acc&egrave;s et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant par courrier &agrave; Direct Medica 31 rue des Longs Pr&egrave;s 92100 BOULOGNE BILLANCOURT, ou par courriel &agrave; infocnil@directmedica.com' );"
+						onclick="alert( 'Cette plateforme de formation &agrave; distance respecte les principes &eacute;nonc&eacute;s dans la loi n&deg; 2004-575 du 21 juin 2004, relative &agrave; la confiance dans l&acute;&eacute;conomie num&eacute;rique. Conform&eacute;ment &agrave; la loi &laquo; informatique et libert&eacute;s &raquo; du 6 janvier 1978 modifi&eacute;e en 2004, vous b&eacute;n&eacute;ficiez d&acute;un droit d&acute;acc&egrave;s et de rectification aux informations qui vous concernent);"
 						href="#">Protection des donn&eacute;es personnelles</a>
 				</div>
 				<div class="footer_box" style="text-align: right; width: 50%;">
 					<a style="color: #49639B; font-size: 12px;"
-						href="mailto:webadmin@directmedica.com" href="#"> Signalez un
+						href="mailto:webadmin@test.com" href="#"> Signalez un
 						dysfonctionnement</a>
 				</div>
 				<br /> <br />  
@@ -109,18 +98,9 @@
 					style="text-align: center; font-weight: bold; font-size: 9pt; color: #49639B;">Date
 					de publication : 17/04/2014</div>
 
-				<!-- div align="center"
-				style="width: 642px; padding: 15px 5px; font-size: 10px; border: 1.5px solid #088608;"
-				class="footer_box">
-				Ce site est la propri&eacute;t&eacute; de Directmedica.<br /> 31,
-				rue des Longs Pr&egrave;s 92100 Boulogne-Billancourt T&eacute;l. :
-				01 70 95 64 00 - Fax : 01 70 95 64 05<br />
-				<br /> Tous droits r&eacute;serv&eacute;s.
-			</div-->
 
 				<div id="footerdm">
-					<p>&copy; Copyright 2014 directmedica - 31 rue des Longs
-						Pr&egrave;s - 92100 Boulogne Billancourt</p>
+					<p>&copy; Copyright 2014</p>
 
 				</div>
 			</div>
