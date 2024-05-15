@@ -1,0 +1,31 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+<div class="content-wrapper">
+
+  <br/><br/><br/>
+  <div id="inline_error"></div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1 style="text-align:center;color: #15c0e6;font-size: 2rem;margin: 0 5%;">Merci pour votre retour d'expérience sur DietyCoach</h1>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-12" align="center">
+        <div style="margin-top:100px;">
+          <a style="padding:15px !important;" href="{{ path('homepage') }}" class="btn btn-lg btn-info" >{{ 'Retourner à l\'accueil'|trans }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+{% endblock %}

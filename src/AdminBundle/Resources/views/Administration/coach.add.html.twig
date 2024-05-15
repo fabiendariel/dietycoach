@@ -1,0 +1,73 @@
+{% extends "AdminBundle::layout_admin.html.twig" %}
+
+{% block ocplatform_body %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/plugins/fullcalendar/fullcalendar.css') }}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="{{ asset('bundles/plugins/fullcalendar/fullcalendar.js') }}"></script>
+    <script src="{{ asset('bundles/plugins/fullcalendar/fr.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {% block title %}
+                Coach
+            {% endblock %}
+        </h1>
+    </section>
+
+    <section class="content">
+
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Informations générales
+                </h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i></button>
+                </div>
+            </div>
+
+            <div class="box-body">
+                {{ form_start(form, {'attr': {'autocomplete': 'nope', 'class': 'form-horizontal' }}) }}
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                    {{ form_label(form.prenom, "Prénom", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.prenom) }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-sm-6">
+                    {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.nom) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                    {{ form_label(form.email, "Email", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control '}}) }}
+                    </div>
+                    <div class="col-sm-6">
+                    {{ form_label(form.mobile, "N° de téléphone mobile", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.mobile) }}
+                    {{ form_widget(form.mobile, {'attr': {'class': 'form-control '}}) }}
+                    </div>
+                </div>
+
+
+                <div class="col-sm-12 text-center">
+                    <br/>
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'},  'label': button}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <br/><br/>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+#fos_user_admin_security_login:
+#    path:  /login
+#    defaults: { _controller: AdminBundle:Security:login }
+
+#fos_user_admin_security_check:
+#    path:  /login_check
+#    defaults: { _controller: AdminBundle:Security:check }
+
+#fos_user_admin_security_logout:
+#    path:  /logout
+#    defaults: { _controller: AdminBundle:Security:logout }
+
+app_admin_index:
+   path:     /
+   defaults: { _controller: AdminBundle:Administration:index, page: 1 }
+
+admin_homepage:
+   path:     /
+   defaults: { _controller: AdminBundle:Administration:index, page: 1 }
+
+# Utilisateurs
+app_administration_utilisateurs:
+    path:     /utilisateurs/{page}
+    defaults: { _controller: AdminBundle:Administration:utilisateurs, page: 1 }
+    requirements:
+        page: \d*
+
+app_administration_utilisateur_add:
+    path:     /utilisateur/add
+    defaults: { _controller: AdminBundle:Administration:utilisateurAdd }
+
+app_administration_utilisateur_update:
+    path:     /utilisateur/{user_id}
+    defaults: { _controller: AdminBundle:Administration:utilisateurUpdate }
+    requirements:
+        user_id: \d+
+
+app_administration_utilisateur_delete:
+    path:     /utilisateur/delete/{user_id}
+    defaults: { _controller: AdminBundle:Administration:utilisateurDelete }
+    requirements:
+        user_id: \d+
+
+# Coachs
+app_administration_coachs:
+    path:     /coachs/{page}
+    defaults: { _controller: AdminBundle:Administration:coachs, page: 1 }
+    requirements:
+        page: \d*
+
+app_administration_coach_add:
+    path:     /coach/add
+    defaults: { _controller: AdminBundle:Administration:coachAdd }
+
+app_administration_coach_update:
+    path:     /coach/{coach_id}
+    defaults: { _controller: AdminBundle:Administration:coachUpdate }
+    requirements:
+        coach_id: \d+
+
+app_administration_coach_delete:
+    path:     /coach/delete/{coach_id}
+    defaults: { _controller: AdminBundle:Administration:coachDelete }
+    requirements:
+        coach_id: \d+
+
+app_administration_coach_update_creneau:
+    path:     /coach/creneau/update
+    defaults: { _controller: AdminBundle:Administration:coachUpdateCreneau }
+
+app_administration_coach_move_creneau:
+    path:     /coach/creneau/move
+    defaults: { _controller: AdminBundle:Administration:coachMoveCreneau }
+
+app_administration_coach_test_creneau:
+    path:     /coach/creneau/test
+    defaults: { _controller: AdminBundle:Administration:coachTestCreneau }
+
+app_administration_coach_delete_creneau:
+    path:     /coach/creneau/del
+    defaults: { _controller: AdminBundle:Administration:coachDeleteCreneau }
+
+# Code d'accès
+app_administration_codes:
+    path:     /codes
+    defaults: { _controller: AdminBundle:Administration:codes }
+
+app_administration_codes_generate:
+    path:     /codes/generate
+    defaults: { _controller: AdminBundle:Administration:codesGenerateExcel }

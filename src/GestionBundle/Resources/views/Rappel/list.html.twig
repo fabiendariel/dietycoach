@@ -1,0 +1,117 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block ocplatform_body %}
+
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+    {% block title %}
+        Dietycoach - Rappels
+    {% endblock  %}
+        </h1>
+    </section>
+
+    <section class="content">
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+
+                Recherche
+
+            </h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
+            </div>
+        </div>
+
+        <div class="box-body">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            <div class="col-sm-12">
+                <div class="col-sm-2">
+                    {{ form_label(form.origineRappel, "Site d'origine", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.origineRappel) }}
+                    {{ form_widget(form.origineRappel, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="col-sm-2">
+                    {{ form_label(form.dateRappel, "Date du rappel", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.dateRappel) }}
+                    {{ form_widget(form.dateRappel, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="col-sm-2">
+                    {{ form_label(form.dateCreation, "Date de création", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.dateCreation) }}
+                    {{ form_widget(form.dateCreation, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="col-sm-1">
+                <br/>
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'},  'label': 'Rechercher'}) }}
+                </div>
+                <div class="col-sm-1">
+                <br/>
+                    <a href="{{ path('app_rappel_list', {'reset': 1}) }}"><button type="button" class="btn btn-danger">Annuler</button></a>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="box box-default">
+        <div class="box-header with-border" style="padding: 12px;">
+            <h3 class="box-title">
+                Liste : {{ nbResults > 0 ? nbResults > 1 ? nbResults ~ ' résultats' : '1 résultat' : '' }}
+            </h3>
+
+            <div class="box-tools pull-right">
+                {#<a class="btn btn-info" href="{{ path('app_admin_connect') }}" >Exporter les résultats</a>#}
+            </div>
+        </div>
+
+        <div class="box-body">
+
+            <table class="operation-list table table-striped table-bordered jambo_table">
+                <tbody>
+                <tr>
+                    <th>Origine</th>
+                    <th>Date création</th>
+                    <th>Date du rappel</th>
+                    <th>Heure du rappel</th>
+                </tr>
+                {% for data in datas %}
+                    <tr
+                    {% set flagAccess = 0 %}
+                    {% if data.access|length == 0 %}
+                        onclick="document.location = '{{ path('app_rappel_detail', {'data_id': data.id}) }}';"
+                    {% else %}
+                        {% set flagAccess = 1 %}
+                        {% set access = data.access|first %}
+                        {% if access.utilisateur.id == app.user.id %}
+                            {% set flagAccess = 0 %}
+                            onclick="document.location = '{{ path('app_rappel_detail', {'data_id': data.id}) }}';"
+                        {% endif %}
+                    {% endif %}
+                    style="{% if flagAccess == 1 %}color: red;{% else %}cursor:pointer;{% endif %}">
+                        <td>{{ data.origineRappel.label }}</td>
+                        <td>{{ data.dateCreation|date('d/m/Y H:i:s') }}</td>
+                        <td>{{ data.dateRappel|date('d/m/Y') }}</td>
+                        <td>{{ data.heureRappel|date('H:i') }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ "Aucun rappel n'est enregistré"|trans }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        {{ pagination.paginate(datas, 10, nbPages, page, 'app_rappel_list') }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+  <script src="https://www.google.com/recaptcha/api.js?hl=fr" async defer></script>
+  <div class="container">
+    {{ form_start(form, {'attr': {'class': 'form-horizontal needs-validation'}}) }}
+      <h1 style="text-align:center;color: #15c0e6;font-size: 2rem;margin: 0 5%;">Bienvenue sur la plateforme de prise de rendez-vous de coaching diététique</h1>
+      <h2 style="text-align: justify;font-size: 16px; margin: 40px 10%;">Votre médecin vous a fourni un coupon avec 3 codes correspondant à 3 sessions de coaching diététique qui vous sont proposées.
+        Ces sessions de coaching sont assurées pour les patients traités par une biothérapie pour une Maladie Inflammatoire Chronique par un(e) diététicien(ne), un professionnel de santé qui
+        saura vous apporter conseil dans votre prise en charge.
+      </h2>
+
+      <div id="inline_error"></div>
+
+      <div class="code">
+        <p class="text-center"><strong>Pour commencer,</strong><br />saisissez le code correspondant à votre rendez-vous, selon l’avancement de votre coaching</p>
+        <div class="row flex-column flex-lg-row justify-content-end justify-content-lg-start align-items-center">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4 offset-lg-2 mb-1 mb-lg-0">
+            {{ form_widget(form.code, {'attr': {'class': 'form-control'}}) }}
+
+          </div>
+          <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+            <div class="code-infos">
+              <p>Il s’agit d’un code personnel fourni<br />par votre médecin contenant 12 caractères : XXXX-XXXX-XXXX</p>
+            </div>
+          </div>
+          {% if output is defined and output.has_error %}
+            <div class="col-12 col-sm-12 error alert alert-block alert-danger text-center" style="margin-top:10px;">
+              {{ output.message }}
+            </div>
+          {% endif %}
+
+        </div>
+        <div class="form-field row justify-content-md-center">
+          <div class="col-md-4 form-group justify-content-md-center" style="margin-top:50px;">
+            <!-- PROD 6LctOv0UAAAAAAgWyySVdsj_FtFsDZIYKVrzUw7p -->
+            <!-- RECETTE 6LfIPrIUAAAAADZSW9Wc-OYa43iuVNysE7rRbOIJ -->
+            <div class="g-recaptcha" data-sitekey="{{ app_cle_captcha }}"></div>
+          </div>
+          <div class="col-12 col-sm-12 alert alert-block alert-danger text-center" id="alert_captcha" style="display:none">
+            Vous devez prouver que vous n'êtes pas un robot
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:20px;">
+          <div class="col text-center">
+            {{ form_widget(form.save, {'attr': {'class': 'btn btn-info mx-auto', 'id': 'submit_code'},  'label': 'Valider mon code'}) }}
+          </div>
+        </div>
+      </div>
+
+      <br/>
+
+
+      <div class="grid-wrapper-sm grid-gutter grid-revert-sm col-md-12">
+        <div class="grid-1 form-actions">
+
+        </div>
+
+      </div>
+      {{ form_end(form) }}
+  </div>
+  <script>
+    $(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+      'use strict';
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+
+
+        $("#code_acces_save").click(function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if(!grecaptcha.getResponse()){
+            $('#alert_captcha').show();
+          }else{
+            $('#alert_captcha').hide();
+          }
+
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }else{
+            var submit_2 = false;
+
+            if(!grecaptcha.getResponse()){
+              $('#alert_captcha').show();
+            }else{
+              $('#alert_captcha').hide();
+              submit_2 = true;
+            }
+
+            if(submit_2)
+              $('form[name="code_acces"]').submit();
+          }
+          form.classList.add('was-validated');
+        });
+      });
+
+    })
+  </script>
+{% endblock %}

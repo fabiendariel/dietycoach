@@ -1,0 +1,24 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+<div class="content-wrapper">
+  <h1 style="text-align:center;color: #15c0e6;font-size: 2rem;margin: 0 5%;">Bienvenue sur la plateforme de prise de rendez-vous de coaching diététique</h1>
+
+  <br/><br/><br/>
+  <div id="inline_error"></div>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+      <h2>Ce lien ne fonctionne plus.</h2>
+    </div>
+  </div>
+  <br/>
+
+</div>
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+{% endblock %}

@@ -1,0 +1,19 @@
+parameters:
+    database_host: CASSIOPEE\RECETTE
+    database_port: null
+    database_name: dietycoach_patient
+    database_user: fresenius_web
+    database_password: 9HwrFh42A
+
+    mailer_transport: smtp
+    mailer_host: smtp.patientys.com
+    mailer_user: cisv@patientys.com
+    mailer_password: 4W4Urb@CTkL
+    secret: ThisTokenIsSecretNotChangeIt
+
+    id_aphp: 5
+
+    cle_captcha: 6LfIPrIUAAAAADZSW9Wc-OYa43iuVNysE7rRbOIJ
+
+    #mail_coach: fdariel@directmedica.com
+    mail_coach: laurette.gruand@webhelpmedica.com

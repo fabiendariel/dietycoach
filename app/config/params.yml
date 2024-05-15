@@ -1,0 +1,26 @@
+# Parameters
+parameters:
+
+    roles:
+      super_admin:    ROLE_SUPER_ADMIN
+      admin:          ROLE_ADMIN
+      professionnel:  ROLE_PDS
+      user:           ROLE_USER
+
+    statut_rappel:
+      en_cours: 1
+      traite:   2
+      annule:   3
+
+    mailer_from: noreply@patientys.com
+    mailer_from_name: Dietycoach
+
+
+    hosts:
+      dev: dietycoach.dev.dmedica.lan
+      recette: dietycoach.recette.dmedica.lan
+      prod: dietycoach.fr
+
+    #PATIENTYS cle_captcha: 6LctOv0UAAAAAAgWyySVdsj_FtFsDZIYKVrzUw7p
+    #PROD 6LfbRxMcAAAAAE_-DKYjCnmVgTMmc8xDQ0CdeKlX
+

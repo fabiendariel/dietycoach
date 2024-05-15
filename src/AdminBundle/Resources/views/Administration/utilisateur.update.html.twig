@@ -1,0 +1,110 @@
+{% extends "AdminBundle::layout_admin.html.twig" %}
+
+{% block ocplatform_body %}
+
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {% block title %}
+                Utilisateur
+            {% endblock %}
+        </h1>
+    </section>
+
+    <section class="content">
+
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                Recherche
+            </h3>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
+            </div>
+        </div>
+
+        <div class="box-body">
+            {{ form_start(form, {'attr': {'novalidate': 'confiture', 'autocomplete': 'nope', 'class': 'form-horizontal'}}) }}
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                {{ form_label(form.firstname, "Prénom", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.firstname) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="col-sm-6">
+                {{ form_label(form.lastname, "Nom", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.lastname) }}
+                {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                {{ form_label(form.username, "Username", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.username) }}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control '}}) }}
+                </div>
+                <div class="col-sm-6">
+                {{ form_label(form.email, "Email", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control '}}) }}
+                </div>
+            </div>
+
+            {% if form.password is defined %}
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    {{ form_label(form.password, "Mot de passe", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.password) }}
+                    {{ form_widget(form.password, {'attr': {'class': 'form-control '}}) }}
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+            {% endif %}
+
+
+            <div class="col-sm-12 text-center">
+                <br/>
+                <input type="submit" value="{{ button|trans }}" class="btn btn-sm btn-success"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    </div>
+    <script>
+        $(function () {
+            if(!$('#administration_user_password').prop('required')){
+                div = $('#administration_user_password').parent();
+                div2 = div.parent();
+                html = '<div class="col-sm-2"><br/>';
+                html += '<input type="checkbox" id="hide_mdp" value="" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">';
+                html += '&nbsp;&nbsp;<label class="control-label" for="hide_mdp">Modifier le mot de passe</label>';
+                html += '</div>'
+                $(html).prependTo(div2);
+                div.hide();
+
+            }
+
+            $('#hide_mdp').on('ifChanged', function () {
+                div = $('#administration_user_password').parent();
+                console.log($(this).prop('checked'));
+                if($(this).prop('checked'))
+                    div.show();
+                else
+                    div.hide();
+            });
+
+
+            $('#administration_user_password .icheckbox_square-blue').each(function () {
+                $(this).css('margin','0 10px')
+            });
+
+
+        });
+    </script>
+
+{% endblock %}

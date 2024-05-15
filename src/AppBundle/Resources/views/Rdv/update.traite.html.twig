@@ -1,0 +1,27 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+<div class="content-wrapper">
+  <h1 style="text-align:center;color: #15c0e6;font-size: 2rem;margin: 0 5%;">Bienvenue sur la plateforme de prise de rendez-vous de coaching diététique</h1>
+
+  <br/><br/><br/>
+  <div id="inline_error"></div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Le rendez-vous prévue pour le</h2>
+      <p style="font-size:2em;"><b>{{ date_rdv_format }}</b></p>
+      <p style="font-size:2em;">De <b>{{ h_debut }}</b> à  <b>{{ h_fin }}</b></p>
+      <h2>n'est plus accessible car celui-ci à déjà eu lieu.</h2><h2>Vous ne pouvez plus le modifier</h2>
+    </div>
+  </div>
+  <br/>
+
+</div>
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+{% endblock %}

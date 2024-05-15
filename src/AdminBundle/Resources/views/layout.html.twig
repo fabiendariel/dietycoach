@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>{% block title %}Dietycoach{% endblock %}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Bootstrap -->
+  <link href="{{ asset('css/bootstrap/bootstrap.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/bootstrap/bootstrap-datepicker.css') }}" rel="stylesheet">
+
+  <link href="{{ asset('css/promed.css') }}" rel="stylesheet">
+  
+</head>
+
+<body class="nav-md">
+<div class="container body">
+  <div class="main_container">
+
+    <div class="" role="main">
+      <div style="margin: 0 5%; width: 90%;">
+        <div class="row rowloginlogo">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <div class="logologin_ars"></div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 loginlignebas">
+              <div class="logologin_hopitaux"></div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <div class="logologin_urps"></div>
+            </div>
+          </div>
+        </div>
+
+        {% block app_body %}{% endblock %}
+
+
+      </div>
+    </div>
+  </div>
+  <br/><br/>
+
+</div>
+</body>
+</html>
+
+{% block app_javascript %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <script type="text/javascript" src="{{ asset('bundles/admin_lte/js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.fr.min.js') }}"></script>
+
+  <script>
+
+    if($('#questionnaire_titre').val() == 3){
+      $('#questionnaire_titreComplementAutres').show(200);
+      $('#questionnaire_titreComplement').hide(200);
+      $("#questionnaire_titreComplementAutres").prop('required',true);
+      $("#questionnaire_titreComplement").prop('required',false);
+
+      $("#questionnaire_rpps").prop('required',false);
+      $("#questionnaire_membre").prop('required',false);
+      $("#questionnaire_disponibilite").prop('required',false);
+
+      $("#questionnaire_membre").val('');
+      $("#questionnaire_rpps").val('');
+
+      $('#membre').hide(200);
+      $('#rpps').hide(200);
+      $('#dispo').hide(200);
+
+      $('#indispo').show(200);
+    }else{
+      $('#questionnaire_titreComplementAutres').hide(200);
+      $('#questionnaire_titreComplement').show(200);
+      $("#questionnaire_titreComplement").prop('required',true);
+      $("#questionnaire_titreComplementAutres").prop('required',false);
+
+      $('#membre').show(200);
+      $("#questionnaire_rpps").prop('required',true);
+      $("#questionnaire_membre").prop('required',true);
+      $("#questionnaire_disponibilite").prop('required',true);
+
+      $('#membre').show(200);
+      $('#indispo').hide(200);
+      $('#dispo').show(200);
+
+      $("#questionnaire_lundiMatin").prop("checked", false);
+      $("#questionnaire_lundiAprem").prop("checked", false);
+
+      $("#questionnaire_mardiMatin").prop("checked", false);
+      $("#questionnaire_mardiAprem").prop("checked", false);
+
+      $("#questionnaire_mercrediMatin").prop("checked", false);
+      $("#questionnaire_mercrediAprem").prop("checked", false);
+
+      $("#questionnaire_jeudiMatin").prop("checked", false);
+      $("#questionnaire_jeudiAprem").prop("checked", false);
+
+      $("#questionnaire_vendrediMatin").prop("checked", false);
+      $("#questionnaire_vendrediAprem").prop("checked", false);
+
+      $("#questionnaire_samediMatin").prop("checked", false);
+      $("#questionnaire_samediAprem").prop("checked", false);
+
+      $("#questionnaire_dimancheMatin").prop("checked", false);
+      $("#questionnaire_dimancheAprem").prop("checked", false);
+    }
+
+    $('#questionnaire_titre').change(function(ev){
+      if($(this).val() == 3){
+        $('#questionnaire_titreComplementAutres').show(200);
+        $('#questionnaire_titreComplement').hide(200);
+        $("#questionnaire_titreComplementAutres").prop('required',true);
+        $("#questionnaire_titreComplement").prop('required',false);
+
+        $("#questionnaire_rpps").prop('required',false);
+        $("#questionnaire_membre").prop('required',false);
+        $("#questionnaire_disponibilite").prop('required',false);
+
+        $("#questionnaire_membre").val('');
+        $("#questionnaire_rpps").val('');
+
+        $('#membre').hide(200);
+        $('#rpps').hide(200);
+        $('#dispo').hide(200);
+
+        $('#indispo').show(200);
+
+
+      }else{
+        $('#questionnaire_titreComplementAutres').hide(200);
+        $('#questionnaire_titreComplement').show(200);
+        $("#questionnaire_titreComplement").prop('required',true);
+        $("#questionnaire_titreComplementAutres").prop('required',false);
+
+        $('#membre').show(200);
+        $("#questionnaire_rpps").prop('required',true);
+        $("#questionnaire_membre").prop('required',true);
+        $("#questionnaire_disponibilite").prop('required',true);
+
+        $('#membre').show(200);
+        $('#indispo').hide(200);
+        $('#dispo').show(200);
+
+        $("#questionnaire_lundiMatin").prop("checked", false);
+        $("#questionnaire_lundiAprem").prop("checked", false);
+
+        $("#questionnaire_mardiMatin").prop("checked", false);
+        $("#questionnaire_mardiAprem").prop("checked", false);
+
+        $("#questionnaire_mercrediMatin").prop("checked", false);
+        $("#questionnaire_mercrediAprem").prop("checked", false);
+
+        $("#questionnaire_jeudiMatin").prop("checked", false);
+        $("#questionnaire_jeudiAprem").prop("checked", false);
+
+        $("#questionnaire_vendrediMatin").prop("checked", false);
+        $("#questionnaire_vendrediAprem").prop("checked", false);
+
+        $("#questionnaire_samediMatin").prop("checked", false);
+        $("#questionnaire_samediAprem").prop("checked", false);
+
+        $("#questionnaire_dimancheMatin").prop("checked", false);
+        $("#questionnaire_dimancheAprem").prop("checked", false);
+      }
+    });
+
+    $('#questionnaire_membre').change(function(ev){
+      if($(this).val() == 2){
+        $('#rpps').show(200);
+        $("#questionnaire_rpps").prop('required',true);
+      }else{
+        $("#questionnaire_rpps").val('');
+        $('#rpps').hide(200);
+        $("#questionnaire_rpps").prop('required',false);
+      }
+    });
+
+    $('#questionnaire_picpus').change(function(ev){
+      if( $('#questionnaire_picpus').is(':checked') ){
+        $("#questionnaire_distance").prop('required',false);
+        $("#questionnaire_picpus").prop('required',false);
+      }
+
+      if( !$('#questionnaire_picpus').is(':checked') && !$('#questionnaire_distance').is(':checked')){
+        $("#questionnaire_distance").prop('required',true);
+        $("#questionnaire_picpus").prop('required',true);
+      }
+    });
+
+    $('#questionnaire_distance').change(function(ev){
+      if( $('#questionnaire_distance').is(':checked') ){
+        $("#questionnaire_distance").prop('required',false);
+        $("#questionnaire_picpus").prop('required',false);
+      }
+
+      if( !$('#questionnaire_picpus').is(':checked') && !$('#questionnaire_distance').is(':checked')){
+        $("#questionnaire_distance").prop('required',true);
+        $("#questionnaire_picpus").prop('required',true);
+      }
+
+    });
+
+    $('#form_questionnaire').submit(function(event) {
+
+      var base_href = (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '');
+      var self = this;
+      event.preventDefault(); //this will prevent the default submit
+
+      $.ajax({
+        url: base_href + '/check',
+        type: 'post',
+        dataType: 'json',
+        data: {
+          'email': $('#questionnaire_email').val(),
+          'rpps' : $('#questionnaire_rpps').val(),
+        },
+        success: function (result) {
+          if(result.has_error == true){
+            alert(result.message);
+          }else{
+            var form = document.getElementById('form_questionnaire');
+            var isValidForm = form.checkValidity();
+            if(isValidForm){
+              if ($(self).data('submitted') === true) {
+                // Previously submitted - don't submit again
+                event.preventDefault();
+              } else {
+                // Mark it so that the next submit can be ignored
+                $(self).data('submitted', true);
+                $(self).unbind('submit').submit();
+              }
+            }
+          }
+        }
+      });
+    })
+  </script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+  <script src="https://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+  <script>
+    webshims.setOptions('waitReady', false);
+    webshims.setOptions('forms-ext', {type: 'date'});
+    webshims.setOptions('forms-ext', {type: 'time'});
+    webshims.polyfill('forms forms-ext');
+  </script>
+{% endblock %}

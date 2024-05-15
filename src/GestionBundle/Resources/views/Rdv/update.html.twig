@@ -1,0 +1,155 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+<div class="content-wrapper">
+  <br/><br/>
+  <div id="inline_error"></div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Un rendez-vous vous a été transmis :</h2>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-8 offset-md-2 text-center" style="padding:5px 40px;font-size:0.7em;border-radius: 6px;display: block;border: 2px solid #4d5059;">
+        <p style="font-size:2em;"><b>{{ date_rdv_format }}</b></p>
+        <p style="font-size:2em;">De <b>{{ h_debut }}</b> à  <b>{{ h_fin }}</b></p>
+        <p style="font-size:2em;">Téléphone du participant : {{ rdv.telephoneParticipant }}</p>
+        <p style="text-align:left;font-size: 1.5em;">Email du participant : {{ rdv.emailParticipant }}</p>
+        <p style="text-align:left;font-size: 1.5em;">Nom du médecin lui ayant transmis le code d'accès : {{ rdv.nomMedecin }}</p>
+        <p style="text-align:left;font-size: 1.5em;">Code Postal du médecin : {{ rdv.cpMedecin }}</p>
+      </div>
+  </div>
+  <br/><br/>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Merci de mentionner l'issue de ce rendez-vous<br/>en cliquant sur l'une des options ci-dessous</h2>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button type="button" id="update_rdv_submit" class="btn btn-lg btn-success" style="margin-right:20px;">
+        <i class="fa fa-calendar-check-o"></i> {{ 'Effectué'|trans }}
+      </button>
+      {#<button type="button" id="update_rdv_update" class="btn btn-lg btn-warning" style="margin-right:20px;margin-left:20px;">
+        <i class="fa fa-calendar"></i> {{ 'Reporté'|trans }}
+      </button>#}
+      <button type="button" id="update_rdv_close" class="btn btn-lg btn-danger" style="margin-left:20px;">
+        <i class="fa fa-calendar-times-o"></i> {{ 'Annulé'|trans }}
+      </button>
+    </div>
+  </div>
+  <br/>
+
+  <div id="valid_rdv" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header textebleu">
+          <h5 class="modal-title">Résolution du RDV</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 15px 30px;">
+          <div class="row">
+            <p class="modal-text col-md-12" style="text-align: center;font-size: 1.4em;"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="valid_rdv_close" class="btn btn-lg btn-danger" >
+            <i class="fa fa-floppy-o"></i> {{ 'Fermer'|trans }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+  <script>
+    $(function(){
+      $('#update_rdv_update').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/coach/update',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            $('#valid_rdv .modal-text').html(result.message);
+            if (false === result.has_error) {
+              $('#valid_rdv .modal-text').addClass('text-success');
+            } else {
+              $('#valid_rdv .modal-text').addClass('text-danger');
+            }
+            $('#valid_rdv').modal('show');
+            $('#valid_rdv_close').click(function () {
+              $('#valid_rdv').modal('hide');
+              $('#valid_rdv .modal-text').html('');
+            });
+          }
+        });
+      });
+      $('#update_rdv_close').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/coach/del',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            $('#valid_rdv .modal-text').html(result.message);
+            if (false === result.has_error) {
+              $('#valid_rdv .modal-text').addClass('text-success');
+            } else {
+              $('#valid_rdv .modal-text').addClass('text-danger');
+            }
+            $('#valid_rdv').modal('show');
+            $('#valid_rdv_close').click(function () {
+              $('#valid_rdv').modal('hide');
+              $('#valid_rdv .modal-text').html('');
+            });
+          }
+        });
+      });
+      $('#update_rdv_submit').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/coach/valid',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            $('#valid_rdv .modal-text').html(result.message);
+            if (false === result.has_error) {
+              $('#valid_rdv .modal-text').addClass('text-success');
+            } else {
+              $('#valid_rdv .modal-text').addClass('text-danger');
+            }
+            $('#valid_rdv').modal('show');
+            $('#valid_rdv_close').click(function () {
+              $('#valid_rdv').modal('hide');
+              $('#valid_rdv .modal-text').html('');
+            });
+            /*alert = '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+            alert += '<strong>Votre choix a été pris en compte. Vous pouvez désormais quitter cette page';
+            alert += '<button type="button" class="close" data-dismiss="alert" aria-label="Fermer">';
+            alert += '  <span aria-hidden="true">&times;</span>';
+            alert += '</button>';
+            alert += '</div>';
+            $(alert).appendTo('.content-wrapper');*/
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}

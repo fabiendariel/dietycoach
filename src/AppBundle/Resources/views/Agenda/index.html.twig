@@ -1,0 +1,488 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+
+  <div class="container">
+    <p class="text-center">Sélectionnez votre <strong>rendez-vous</strong> en ligne parmi les créneaux disponibles</p>
+<!--
+    <div class="filter-wrapper agenda-header">
+      <div class="content">
+        <div class="agenda-date-selector" data-name="directory" data-start="{{ date1 | date('Y-m-d') }}">
+          {% if prev_startDate is not null %}
+            <a href="/agenda/creneaux?startDate={{ prev_startDate | date('Y-m-d') }}" class="icon-chevron-left nav nav" data-direction="prev" title="Précédents">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+              </svg>
+            </a>
+          {% else %}
+            <a href="" class="icon-chevron-left nav unavailable" data-direction="prev" title="Précédents"></a>
+          {% endif %}
+          <div class="date-wrapper">
+            {{ date1_lib | raw }}
+            {{ date2_lib | raw }}
+            {{ date3_lib | raw }}
+            {{ date4_lib | raw }}
+            {{ date5_lib | raw }}
+            {{ date6_lib | raw }}
+          </div>
+          <a href="/agenda/creneaux?startDate={{ next_startDate | date('Y-m-d') }}" class="icon-chevron-right nav" data-direction="next" title="Suivants">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+-->
+    <div class="content-wrapper">
+      <div
+              agenda-root
+              data-url="/agenda/creneaux"
+              agenda-next-availability="Prochaine disponibilité : %date%"
+              agenda-unavailability="Ce professionnel n&#039;a pas encore déclaré de disponibilités"
+              agenda-next-slots="Suivants"
+              agenda-previous-slots="Précédents"
+              data-date-selector="directory"
+      >
+        <div class="professional-date" >
+          <div class="filter-wrapper agenda-header">
+            <div class="content">
+              <div class="agenda-date-selector" data-name="directory" data-start="{{ date1 | date('Y-m-d') }}">
+                {% if prev_startDate is not null %}
+                  <a href="/agenda/creneaux?startDate={{ prev_startDate | date('Y-m-d') }}" class="icon-chevron-left nav nav" data-direction="prev" title="Précédents">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+                    </svg>
+                  </a>
+                {% else %}
+                  <a href="" class="icon-chevron-left nav unavailable" data-direction="prev" title="Précédents"></a>
+                {% endif %}
+                <div class="date-wrapper">
+                  {{ date1_lib | raw }}
+                  {{ date2_lib | raw }}
+                  {{ date3_lib | raw }}
+                  {{ date4_lib | raw }}
+                  {{ date5_lib | raw }}
+                  {{ date6_lib | raw }}
+                </div>
+                <a href="/agenda/creneaux?startDate={{ next_startDate | date('Y-m-d') }}" class="icon-chevron-right nav" data-direction="next" title="Suivants">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="professional-card daily" >
+          <div class="block-agenda">
+            <div class="agenda-wrapper">
+              <div class="agenda" professional="{{ coach.id }}"
+                   data-analytics-replace="{
+                    'data':{
+                      'event':'clic_cta<prendre_rendez-vous>',
+                      'eventCategory':'clic_cta<prendre_rendez-vous>',
+                      'eventAction':'prendre rendez-vous',
+                      'pageType':'Coach'
+              }}">
+                <div class="day" data-date="{{ date1|date('Y-m-d') }}">
+                  <div class="slot-wrapper">
+                    {% for day in listeCreneaux %}
+
+                      {% if day.date == date1|date('Y-m-d')  %}
+                        {% for slot in day.slots %}
+                          <div class="slot" style="margin-left: 0px; margin-top: 0px;">
+                            <a href="/mon_coach/{{ coach.id }}/rdv/creer/{{ day.date|replace({'-':''}) ~'/'~ slot|replace({':':''}) }}" data-date="{{ date1|date('d/m/Y') }}" data-heure="{{ slot|replace({':':'h'}) }}">{{ slot }}</a>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="day" data-date="{{ date2|date('Y-m-d') }}">
+                  <div class="slot-wrapper">
+                    {% for day in listeCreneaux %}
+                      {% if day.date == date2|date('Y-m-d')  %}
+                        {% for slot in day.slots %}
+                          <div class="slot" style="margin-left: 0px; margin-top: 0px;">
+                            <a href="/mon_coach/{{ coach.id }}/rdv/creer/{{ day.date|replace({'-':''}) ~'/'~ slot|replace({':':''}) }}" data-date="{{ date2|date('d/m/Y') }}" data-heure="{{ slot|replace({':':'h'}) }}">{{ slot }}</a>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="day" data-date="{{ date3|date('Y-m-d') }}">
+                  <div class="slot-wrapper">
+                    {% for day in listeCreneaux %}
+                      {% if day.date == date3|date('Y-m-d')  %}
+                        {% for slot in day.slots %}
+                          <div class="slot" style="margin-left: 0px; margin-top: 0px;">
+                            <a href="/mon_coach/{{ coach.id }}/rdv/creer/{{ day.date|replace({'-':''}) ~'/'~ slot|replace({':':''}) }}" data-date="{{ date3|date('d/m/Y') }}" data-heure="{{ slot|replace({':':'h'}) }}">{{ slot }}</a>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="day" data-date="{{ date4|date('Y-m-d') }}">
+                  <div class="slot-wrapper">
+                    {% for day in listeCreneaux %}
+                      {% if day.date == date4|date('Y-m-d')  %}
+                        {% for slot in day.slots %}
+                          <div class="slot" style="margin-left: 0px; margin-top: 0px;">
+                            <a href="/mon_coach/{{ coach.id }}/rdv/creer/{{ day.date|replace({'-':''}) ~'/'~ slot|replace({':':''}) }}" data-date="{{ date4|date('d/m/Y') }}" data-heure="{{ slot|replace({':':'h'}) }}">{{ slot }}</a>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="day" data-date="{{ date5|date('Y-m-d') }}">
+                  <div class="slot-wrapper">
+                    {% for day in listeCreneaux %}
+                      {% if day.date == date5|date('Y-m-d')  %}
+                        {% for slot in day.slots %}
+                          <div class="slot" style="margin-left: 0px; margin-top: 0px;">
+                            <a href="/mon_coach/{{ coach.id }}/rdv/creer/{{ day.date|replace({'-':''}) ~'/'~ slot|replace({':':''}) }}" data-date="{{ date5|date('d/m/Y') }}" data-heure="{{ slot|replace({':':'h'}) }}">{{ slot }}</a>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="day" data-date="{{ date6|date('Y-m-d') }}">
+                  <div class="slot-wrapper">
+                    {% for day in listeCreneaux %}
+                      {% if day.date == date6|date('Y-m-d')  %}
+                        {% for slot in day.slots %}
+                          <div class="slot" style="margin-left: 0px; margin-top: 0px;">
+                            <a href="/mon_coach/{{ coach.id }}/rdv/creer/{{ day.date|replace({'-':''}) ~'/'~ slot|replace({':':''}) }}" data-date="{{ date6|date('d/m/Y') }}" data-heure="{{ slot|replace({':':'h'}) }}">{{ slot }}</a>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="display:none;">
+          <div class="col-md-12 text-center">
+            <button type="submit" id="other_date_rdv_modal" class="btn btn-lg btn-secondary">
+              <i class="fa fa-floppy-o"></i> {{ 'Aucun créneau ne me correspond'|trans }}
+            </button>
+          </div>
+        </div>
+      </div>
+      {#
+        <div class="row text-center">
+          {{ pagination.paginate(datas, 10, nbPages, page, 'app_agenda_list') }}
+        </div>
+      #}
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <br/><br/>
+        Pour nous contacter :&nbsp;<a href="mailto:dietycoach@patientys.com">dietycoach@patientys.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="confirm_rdv" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header textebleu">
+            <h5 class="modal-title">Prendre RDV avec le coach</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 15px 30px;">
+            <div class="row">
+              <p class="modal-title col-md-12" style="text-align: center;font-size: 1.5em;">Souhaitez-vous sélectionner ce créneau :<br/>
+                <span id="detail_date" style="font-weight: bold;"></span><br/>à <span id="detail_heure" style="font-weight: bold;"></span>
+              </p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="confirm_rdv_submit" class="btn btn-lg btn-success">
+              <i class="fa fa-floppy-o"></i> {{ 'Je confirme'|trans }}
+            </button>
+            <button type="button" id="annule_rdv" class="btn btn-lg btn-danger" >
+              <i class="fa fa-floppy-o"></i> {{ 'Retour'|trans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="valid_rdv" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header textebleu">
+            <h5 class="modal-title">Prendre RDV avec le coach</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 15px 30px;">
+            <div class="row">
+              <p class="modal-text col-md-12" style="text-align: center;font-size: 1.4em;"></p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="valid_rdv_close" class="btn btn-lg btn-danger" >
+              <i class="fa fa-floppy-o"></i> {{ 'Fermer'|trans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="create_rdv" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header textebleu">
+            <h5 class="modal-title">Prendre RDV avec le coach</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 15px 50px;font-size:0.8em;height: 450px;overflow-y: scroll;">
+            <div class="row">
+              <p>Pour valider votre rendez-vous, veuillez renseigner les informations suivantes :</p>
+              <form method="post" id="form_create_rdv" enctype="multipart/form-data" style="margin:20px 0;"
+                    class="needs-validation panel panel-info col-md-12" novalidate role="form"
+              >
+                <div class="row">
+                  <div class="col-md-5">
+                    <label class="control-label">N° de téléphone<span style="color:red;">*</span> :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="telephoneParticipant" class="form-control" type="text" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$"
+                           maxlength="10" minlength="10" name="telephoneParticipant"  value="{{ rdv is not null ? rdv.telephoneParticipant : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;N° de téléphone valide obligatoire !</div>
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="col-md-5">
+                    <label class="control-label">Adresse email<span style="color:red;">*</span> :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="emailParticipant" class="form-control" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                           name="emailParticipant" value="{{ rdv is not null ? rdv.emailParticipant : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;Adresse email valide obligatoire !</div>
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="col-md-5">
+                    <label class="control-label">Nom du médecin<span style="color:red;">*</span> :<br/>
+                      <small>(à l’origine de votre inscription)</small>
+                    </label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="nomMedecin" class="form-control" type="text" name="nomMedecin"  value="{{ rdv is not null ? rdv.nomMedecin : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;Nom du médecin obligatoire !</div>
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="col-md-5">
+                    <label class="control-label">Code Postal du médecin<span style="color:red;">*</span> :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="cpMedecin" class="form-control" type="text" pattern="^\d{5}$"
+                           name="cpMedecin" value="{{ rdv is not null ? rdv.cpMedecin : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;Code Postal valide obligatoire !</div>
+                  </div>
+                </div>
+                <input type="hidden" id="url_dest" name="url_dest" />
+              </form>
+              <small><span style="color:red;">*</span> Champs obligatoires</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="create_rdv_submit" class="btn btn-lg btn-success">
+              <i class="fa fa-floppy-o"></i> {{ 'Valider'|trans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="other_date_rdv" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header textebleu">
+            <h5 class="modal-title">Prendre RDV avec le coach</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 15px 30px;">
+            <div class="row">
+              <p class="modal-text col-md-12" style="text-align: center;font-size: 1.4em;">
+                Les créneaux proposés ne vous conviennent pas ?<br/>
+                Veuillez nous indiquer plusieurs de vos préférences :
+              </p>
+              <form method="post" id="form_other_date_rdv" enctype="multipart/form-data" style="margin:20px 0;"
+                    class="needs-validation panel panel-info col-md-12" novalidate role="form"
+              >
+                <div class="form-row">
+                  <div class="col-md-5">
+                    <label class="control-label">N° de téléphone<span style="color:red;">*</span> :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="telephoneParticipantOther" class="form-control" type="text" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$"
+                           maxlength="10" minlength="10" name="telephoneParticipantOther"  value="{{ rdv is not null ? rdv.telephoneParticipant : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;N° de téléphone valide obligatoire !</div>
+                  </div>
+                </div>
+                <br/>
+                <div class="form-row">
+                  <div class="col-md-5">
+                    <label class="control-label">Adresse email<span style="color:red;">*</span> :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="emailParticipantOther" class="form-control" type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                           name="emailParticipantOther" value="{{ rdv is not null ? rdv.emailParticipant : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;Adresse email valide obligatoire !</div>
+                  </div>
+
+                </div>
+                <br/>
+                <div class="form-row">
+                  <div class="col-md-5">
+                    <label class="control-label">Nom du médecin<span style="color:red;">*</span> :<br/>
+                      <small>(à l’origine de votre inscription)</small>
+                    </label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="nomMedecinOther" class="form-control" type="text" name="nomMedecinOther"  value="{{ rdv is not null ? rdv.nomMedecin : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;Nom du médecin obligatoire !</div>
+                  </div>
+                </div>
+                <br/>
+                <div class="row">
+                  <div class="col-md-5">
+                    <label class="control-label">Code Postal du médecin<span style="color:red;">*</span> :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <input id="cpMedecinOther" class="form-control" type="text" pattern="^\d{5}$"
+                           name="cpMedecinOther" value="{{ rdv is not null ? rdv.cpMedecin : '' }}" required />
+                    <div class="invalid-feedback">&nbsp;&nbsp;&nbsp;Code Postal valide obligatoire !</div>
+                  </div>
+
+                </div>
+                <small><span style="color:red;">*</span> Champs obligatoires</small>
+                <br/><br/>
+                <div class="form-row">
+                  <div class="col-md-5">
+                    <label class="control-label">Date</label>
+                  </div>
+                  <div class="col-md-2">
+                    &nbsp;
+                  </div>
+                  <div class="col-md-5">
+                    <label class="control-label">Créneau horaire</label>
+                  </div>
+                </div>
+                <br/>
+                <div class="form-row">
+                  <div class="col-md-5">
+                    <input id="dateChoice1" class="form-control" type="datetime" name="dateChoice1" />
+                  </div>
+                  <div class="col-md-2 text-center" style="padding-top:10px;">
+                    entre
+                  </div>
+                  <div class="col-md-2">
+                    <input id="debutChoice1" class="form-control" type="text" name="debutChoice1" />
+                  </div>
+                  <div class="col-md-1 text-center" style="padding-top:10px;">
+                    et
+                  </div>
+                  <div class="col-md-2">
+                    <input id="finChoice1" class="form-control" type="text" name="finChoice1" />
+                  </div>
+                </div>
+                <br/>
+                <div class="form-row">
+                  <div class="col-md-5">
+                    <input id="dateChoice2" class="form-control" type="datetime" name="dateChoice2" />
+                  </div>
+                  <div class="col-md-2 text-center" style="padding-top:10px;">
+                    entre
+                  </div>
+                  <div class="col-md-2">
+                    <input id="debutChoice2" class="form-control" type="text" name="debutChoice2" />
+                  </div>
+                  <div class="col-md-1 text-center" style="padding-top:10px;">
+                    et
+                  </div>
+                  <div class="col-md-2">
+                    <input id="finChoice2" class="form-control" type="text" name="finChoice2" />
+                  </div>
+                </div>
+                <br/>
+                <div class="form-row">
+                  <div class="col-md-5">
+                    <input id="dateChoice3" class="form-control" type="datetime" name="dateChoice3" />
+                  </div>
+                  <div class="col-md-2 text-center" style="padding-top:10px;">
+                    entre
+                  </div>
+                  <div class="col-md-2">
+                    <input id="debutChoice3" class="form-control" type="text" name="debutChoice3" />
+                  </div>
+                  <div class="col-md-1 text-center" style="padding-top:10px;">
+                    et
+                  </div>
+                  <div class="col-md-2">
+                    <input id="finChoice3" class="form-control" type="text" name="finChoice3" />
+                  </div>
+                </div>
+                <br/><br/>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" id="other_date_rdv_submit" class="btn btn-lg btn-success">
+              <i class="fa fa-floppy-o"></i> {{ 'Valider'|trans }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+  <script type="text/javascript" src="{{ asset('js/agenda.js') }}"></script>
+  <script>
+    $(function(){
+
+      if($('.slot').length == 0){
+        var next_creneau = '';
+        {% if date_next_creneau is not null %}
+        next_creneau = '<div class="next-wrapper"><span class="unavailable" style="color:#0078a8;cursor:pointer;" onclick="location.href=\'/agenda/creneaux?startDate={{ monday_next_creneau | date('Y-m-d') }}\'" >Le prochain créneau disponible sera le {{ date_next_creneau|date('d/m/Y') }}&nbsp;&nbsp;>></span></div>';
+        {% else %}
+        next_creneau = '<div class="next-wrapper"><span class="unavailable">Le coach n\'a pas encore déclaré de disponibilités à partir de cette date</span></div>';
+        {% endif %}
+
+        $('.agenda').addClass('unavailable');
+        $('.agenda').html(next_creneau);
+      }
+
+      agenda.init();
+    });
+  </script>
+{% endblock %}

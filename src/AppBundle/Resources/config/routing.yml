@@ -1,0 +1,67 @@
+#------------------------------
+# Accueil
+# -----------------------------
+
+homepage:
+    path:      /
+    defaults: { _controller: AppBundle:Agenda:code }
+
+default:
+    path:     /
+    defaults: { _controller: AppBundle:Agenda:code }
+
+app_agenda:
+    path:     /agenda
+    defaults: { _controller: AppBundle:Agenda:index }
+
+# Agenda
+app_agenda_code:
+    path:      /mon_code
+    defaults: { _controller: AppBundle:Agenda:code }
+
+app_agenda_list:
+    path:      /agenda/creneaux
+    defaults:  { _controller: AppBundle:Agenda:index}
+
+app_rdv:
+    path:      /mon_coach/{coach_id}/rdv/creer/{date_rdv}/{heure_rdv}
+    defaults:
+        _controller: AppBundle:Agenda:createRdv
+    requirements:
+        coach_id: \d+
+        date_rdv: \d+
+        heure_rdv: \d+
+
+app_rdv_update:
+    path:      /rdv/update/{rdv}
+    defaults:
+        _controller: AppBundle:Rdv:updateRdv
+
+app_rdv_update_confirm:
+    path:      /rdv/del/{id_rdv}
+    defaults:
+        _controller: AppBundle:Rdv:updateRdvConfirm
+    requirements:
+        id_rdv: \d+
+
+app_cgu:
+    path:      /cgu
+    defaults:
+        _controller: AppBundle:Agenda:cgu
+
+app_mentions_legales:
+    path:      /mentions-legales
+    defaults:
+        _controller: AppBundle:Agenda:mentions
+
+app_rdv_preferences:
+    path:      /preferences
+    defaults:
+        _controller: AppBundle:Agenda:prefRdv
+
+app_relance_email:
+    path:      /relance/{id_rdv}
+    defaults:
+        _controller: AppBundle:Agenda:relanceEmail
+    requirements:
+        id_rdv: \d+

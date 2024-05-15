@@ -1,0 +1,16 @@
+parameters:
+    database_host: 10.9.10.21
+    database_port: 1433
+    database_name: dietycoach_patient
+    database_user: fresenius_web
+    database_password: 4fC64EAcd
+    mailer_transport: smtp
+    mailer_host: smtp.patientys.com
+    mailer_user: cisv@patientys.com
+    mailer_password: 4W4Urb@CTkL
+    secret: ThisTokenIsSecretNotChangeIt
+
+    id_aphp: 9
+
+    cle_captcha: 6LfbRxMcAAAAAE_-DKYjCnmVgTMmc8xDQ0CdeKlX
+    mail_coach: laurette.gruand@webhelpmedica.com

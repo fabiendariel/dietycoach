@@ -1,0 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}
+Dietycoach – Oubli de mot de passe
+{% endblock %}
+{% block body_text %}
+{{ 'resetting.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{% endblock %}
+{% block body_html %}
+<p>Bonjour {{ user.lastname }},</p>
+<p>Vous pouvez réinitialiser votre mot de passe à l’adresse suivante :</p>
+<center>
+<br/><a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+</center>
+<p>Si ce lien ne fonctionne pas, essayez de le recopier entièrement dans la barre d’adresse de votre navigateur.</p>
+<p>Ce lien sera valide pendant 24h. S’il est expiré, vous pouvez en générer un nouveau ici <a href="{{ url('fos_user_resetting_request') }}">"Mot de passe oublié"</a>.
+<br/>Si vous n’avez pas effectué cette demande, merci de ne pas tenir compte de cet e-mail.
+</p>
+<p>Ceci est un courriel automatique envoyé par l’application, veuillez ne pas y répondre.
+</p>
+{% endblock %}

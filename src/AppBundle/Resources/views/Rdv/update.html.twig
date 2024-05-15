@@ -1,0 +1,64 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+<div class="content-wrapper">
+  <h1 style="text-align:center;color: #15c0e6;font-size: 2rem;margin: 0 5%;">Bienvenue sur la plateforme de prise de rendez-vous de coaching diététique</h1>
+
+  <br/><br/><br/>
+  <div id="inline_error"></div>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+      <h2>Souhaitez-vous vraiment modifier/annuler votre rendez-vous de coaching diététique du</h2>
+      <p style="font-size:2em;"><b>{{ date_rdv_format }}</b></p>
+      <p style="font-size:2em;">De <b>{{ h_debut }}</b> à  <b>{{ h_fin }}</b> ?</p>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button type="button" id="update_rdv_submit" class="btn btn-lg btn-success" style="margin-right:20px;">
+        <i class="fa fa-floppy-o"></i> {{ 'Oui'|trans }}
+      </button>
+      <button type="button" id="update_rdv_close" class="btn btn-lg btn-danger" style="margin-left:20px;">
+        <i class="fa fa-floppy-o"></i> {{ 'Non'|trans }}
+      </button>
+    </div>
+  </div>
+  <br/>
+
+</div>
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+  <script>
+    $(function(){
+      $('#update_rdv_close').click(function(){
+        location.href='/';
+      });
+      $('#update_rdv_submit').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/rdv/del/{{ id_rdv }}',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            alert = '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+            alert += '<strong>Votre choix a été pris en compte. Nous vous redirigons sur la page de prise de RDV si vous souhaitez choisir un autre creneau horaire';
+            alert += '<button type="button" class="close" data-dismiss="alert" aria-label="Fermer">';
+            alert += '  <span aria-hidden="true">&times;</span>';
+            alert += '</button>';
+            alert += '</div>';
+            $(alert).appendTo('.content-wrapper');
+            setTimeout(function(){ location.href='/agenda'; }, 3000);
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}

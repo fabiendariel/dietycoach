@@ -1,0 +1,42 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      {{ form_start(form, {'attr': {'autocomplete': 'nope', 'class': 'form-horizontal', 'id': 'form_add_creneau'}}) }}
+      <div class="modal-header textebleu">
+        <button type="button" class="close fondgris" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{ infos_dispo.title|trans }}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="padding:0 50px;">
+          <div id="inline_error"></div>
+          <table class="table">
+            <tr>
+              <td>Date :</td><td>
+                {{ form_errors(form.date) }}
+                {{ form_widget(form.date, {'attr': {'class': 'col-md-5'}}) }}
+              </td>
+            </tr>
+            <tr>
+              <td>Heure de début :</td><td>
+                {{ form_errors(form.heure_debut) }}
+                {{ form_widget(form.heure_debut, {'attr': {'class': 'col-md-4'}}) }}
+
+              </td>
+            </tr>
+            <tr>
+              <td>Heure de fin (MAX 23:00) :</td><td>
+                {{ form_errors(form.heure_fin) }}
+                {{ form_widget(form.heure_fin, {'attr': {'class': 'col-md-4'}}) }}
+              </td>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer" style="background: #FFF;">
+        <button style="margin-right: 573px;" class="btn btn-danger" id="delete_creneau">Supprimer le créneau</button>
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-success', 'id': 'submit_creneau'},  'label': infos_dispo.btn_submit}) }}
+      </div>
+
+      {{ form_end(form) }}
+  </div>
+</div>

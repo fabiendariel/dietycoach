@@ -1,0 +1,53 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+<div class="content-wrapper">
+
+  <br/><br/><br/>
+  <div id="inline_error"></div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Le rendez-vous prévue pour le</h2>
+      <p style="font-size:2em;"><b>{{ date_rdv_format }}</b></p>
+      <p style="font-size:2em;">De <b>{{ h_debut }}</b> à  <b>{{ h_fin }}</b></p>
+      <h2>n'est plus accessible car celui-ci à déjà eu lieu ou a été annulé.</h2><h2>Vous ne pouvez plus le modifier</h2>
+    </div>
+  </div>
+  <br/>
+
+</div>
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+  <script>
+    $(function(){
+      $('#update_rdv_close').click(function(){
+        location.href='/';
+      });
+      $('#update_rdv_submit').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/rdv/del/{{ id_rdv }}',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            alert = '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+            alert += '<strong>Votre choix a été pris en compte. Nous vous redirigons sur la page de prise de RDV si vous souhaitez choisir un autre creneau horaire';
+            alert += '<button type="button" class="close" data-dismiss="alert" aria-label="Fermer">';
+            alert += '  <span aria-hidden="true">&times;</span>';
+            alert += '</button>';
+            alert += '</div>';
+            $(alert).appendTo('.content-wrapper');
+            setTimeout(function(){ location.href='/agenda'; }, 3000);
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}

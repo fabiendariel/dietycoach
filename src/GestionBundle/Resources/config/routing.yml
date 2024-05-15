@@ -1,0 +1,48 @@
+app_gestion_index:
+    path:      /rdv/list
+    defaults: { _controller: GestionBundle:Rdv:list, page: 1 }
+
+# Rappels
+app_rdv_coach_list:
+    path:      /rdv/list/{page}
+    defaults:  { _controller: GestionBundle:Rdv:list, page: 1}
+    requirements:
+      page: \d*
+
+app_rdv_coach_update:
+    path:      /rdv/{coach_id}
+    defaults:
+        _controller: GestionBundle:Rdv:updateRdv
+
+app_rdv_coach_update_confirm_del:
+    path:      /del
+    defaults:
+        _controller: GestionBundle:Rdv:updateRdvConfirm
+        option: del
+    requirements:
+        id_rdv: \d+
+
+app_rdv_coach_update_confirm_update:
+    path:      /update
+    defaults:
+        _controller: GestionBundle:Rdv:updateRdvConfirm
+        option: update
+    requirements:
+        id_rdv: \d+
+
+
+app_rdv_coach_update_confirm_valid:
+    path:      /valid
+    defaults:
+        _controller: GestionBundle:Rdv:updateRdvConfirm
+        option: valid
+    requirements:
+        id_rdv: \d+
+
+app_satisfaction:
+    path:      /satisfaction/{token}
+    defaults:
+        _controller: GestionBundle:Rdv:satisfactionRdv
+
+
+

@@ -1,0 +1,334 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% import 'AppBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block app_body %}
+<div class="content-wrapper">
+  <h1 style="text-align:center;color: #15c0e6;font-size: 2rem;margin: 0 5%;">QUESTIONNAIRE DE SATISFACTION</h1>
+
+  <br/><br/><br/>
+  <div id="inline_error"></div>
+  <form name="form" method="post" enctype="multipart/form-data" >
+    <!-- page content -->
+    <div class="login_col" role="main">
+      <div class="">
+        <div class="row rowlogin">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-1 col-sm-1 col-xs-0"></div>
+            <div class="col-md-10 col-sm-10 col-xs-12">
+              <div class="col-md-12">
+                <div class="page-title">
+                  <div class="textevert">
+                    QUESTION 1
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="bloc bloc_blanc">
+                      <table class="table cellulecentrer"><tbody>
+                        <tr id="tr_q1">
+                          <td>
+                            <div class="form-group fondvert  texteblanc title_question" id="q1">
+                              <label class="control-label">Êtes-vous globalement satisfait de votre prise en charge au sein de DietyCoach ?<br/>
+                                (sur une échelle de 1 à 10 : 1 pas satisfait - 10 très satisfait)</label>
+                            </div>
+                            <div style="column-count:1;-moz-column-count: 1;">
+                              <div id="form_question_q1" class="case">
+                                <input type="radio" id="form_question_q1_0" name="form[question_q1]" value="1" data-score="1">
+                                <label for="form_question_q1_0"><span title="1"><b>1</b></span></label>
+                                <input type="radio" id="form_question_q1_1" name="form[question_q1]" value="2" data-score="2">
+                                <label for="form_question_q1_1"><span title="2"><b>2</b></span></label>
+                                <input type="radio" id="form_question_q1_2" name="form[question_q1]" value="3" data-score="3">
+                                <label for="form_question_q1_2"><span title="3"><b>3</b></span></label>
+                                <input type="radio" id="form_question_q1_3" name="form[question_q1]" value="4" data-score="4">
+                                <label for="form_question_q1_3"><span title="4"><b>4</b></span></label>
+                                <input type="radio" id="form_question_q1_4" name="form[question_q1]" value="5" data-score="5">
+                                <label for="form_question_q1_4"><span title="4"><b>5</b></span></label>
+                                <input type="radio" id="form_question_q1_5" name="form[question_q1]" value="6" data-score="6">
+                                <label for="form_question_q1_5"><span title="6"><b>6</b></span></label>
+                                <input type="radio" id="form_question_q1_6" name="form[question_q1]" value="7" data-score="7">
+                                <label for="form_question_q1_6"><span title="7"><b>7</b></span></label>
+                                <input type="radio" id="form_question_q1_7" name="form[question_q1]" value="8" data-score="8">
+                                <label for="form_question_q1_7"><span title="8"><b>8</b></span></label>
+                                <input type="radio" id="form_question_q1_8" name="form[question_q1]" value="9" data-score="9">
+                                <label for="form_question_q1_8"><span title="9"><b>9</b></span></label>
+                                <input type="radio" id="form_question_q1_9" name="form[question_q1]" value="10" data-score="10">
+                                <label for="form_question_q1_9"><span title="10"><b>10</b></span></label>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="page-title">
+                  <div class="textevert">
+                    QUESTION 2
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="bloc bloc_blanc">
+                      <table class="table cellulecentrer"><tbody>
+                        <tr id="tr_q2">
+                          <td>
+                            <div class="form-group fondvert  texteblanc title_question" id="q2">
+                              <label class="control-label">Êtes-vous satisfait de votre session de coaching avec votre diététicien ?</label>
+                            </div>
+                            <div style="column-count:1;-moz-column-count: 1;">
+                              <div id="form_question_q2" class="case">
+                                <input type="radio" id="form_question_q2_0" name="form[question_q2]" value="Oui" data-score="0">
+                                <label style="height:120px;width:120px;" for="form_question_q2_0"><span title="Oui"><b>Oui</b></span></label>
+                                <input type="radio" id="form_question_q2_1" name="form[question_q2]" value="Non" data-score="1">
+                                <label style="height:120px;width:120px;" for="form_question_q2_1"><span title="Non"><b>Non</b></span></label>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="page-title">
+                  <div class="textevert">
+                    QUESTION 3
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="bloc bloc_blanc">
+                      <table class="table cellulecentrer"><tbody>
+                        <tr id="tr_q3">
+                          <td>
+                            <div class="form-group fondvert  texteblanc title_question" id="q3">
+                              <label class="control-label">Comment jugez-vous la plateforme de prise de rendez-vous ?</label>
+                            </div>
+                            <div style="column-count:1;-moz-column-count: 1;">
+                              <div id="form_question_q3" class="case">
+                                <input type="radio" id="form_question_q3_0" name="form[question_q3]" value="Très pratique" data-score="0">
+                                <label style="height:120px;width:180px;" for="form_question_q3_0"><span title="Très pratique"><b>Très pratique</b></span></label>
+                                <input type="radio" id="form_question_q3_1" name="form[question_q3]" value="Pratique" data-score="1">
+                                <label style="height:120px;width:180px;" for="form_question_q3_1"><span title="Pratique"><b>Pratique</b></span></label>
+                                <input type="radio" id="form_question_q3_2" name="form[question_q3]" value="Peu pratique" data-score="2">
+                                <label style="height:120px;width:180px;" for="form_question_q3_2"><span title="Peu pratique"><b>Peu pratique</b></span></label>
+                                <input type="radio" id="form_question_q3_3" name="form[question_q3]" value="Pas utilisé" data-score="3">
+                                <label style="height:120px;width:180px;" for="form_question_q3_3"><span title="Pas utilisé"><b>Pas utilisé</b></span></label>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="page-title">
+                  <div class="textevert">
+                    QUESTION 4
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="bloc bloc_blanc">
+                      <table class="table cellulecentrer"><tbody>
+                        <tr id="tr_q4">
+                          <td>
+                            <div class="form-group fondviolet  texteblanc title_question" id="q4">
+                              <label class="control-label">Recommanderiez-vous DietyCoach à des patients traités, comme vous, par une biothérapie pour un rhumatisme inflammatoire chronique ?
+                                <br/>(sur une échelle de 1 à 10 : 1 pas satisfait - 10 très satisfait)</label>
+                            </div>
+                            <div style="column-count:1;-moz-column-count: 1;">
+                              <div id="form_question_q4" class="case">
+                                <input type="radio" id="form_question_q4_0" name="form[question_q4]" value="1" data-score="1">
+                                <label for="form_question_q4_0"><span title="1"><b>1</b></span></label>
+                                <input type="radio" id="form_question_q4_1" name="form[question_q4]" value="2" data-score="2">
+                                <label for="form_question_q4_1"><span title="2"><b>2</b></span></label>
+                                <input type="radio" id="form_question_q4_2" name="form[question_q4]" value="3" data-score="3">
+                                <label for="form_question_q4_2"><span title="3"><b>3</b></span></label>
+                                <input type="radio" id="form_question_q4_3" name="form[question_q4]" value="4" data-score="4">
+                                <label for="form_question_q4_3"><span title="4"><b>4</b></span></label>
+                                <input type="radio" id="form_question_q4_4" name="form[question_q4]" value="5" data-score="5">
+                                <label for="form_question_q4_4"><span title="4"><b>5</b></span></label>
+                                <input type="radio" id="form_question_q4_5" name="form[question_q4]" value="6" data-score="6">
+                                <label for="form_question_q4_5"><span title="6"><b>6</b></span></label>
+                                <input type="radio" id="form_question_q4_6" name="form[question_q4]" value="7" data-score="7">
+                                <label for="form_question_q4_6"><span title="7"><b>7</b></span></label>
+                                <input type="radio" id="form_question_q4_7" name="form[question_q4]" value="8" data-score="8">
+                                <label for="form_question_q4_7"><span title="8"><b>8</b></span></label>
+                                <input type="radio" id="form_question_q4_8" name="form[question_q4]" value="9" data-score="9">
+                                <label for="form_question_q4_8"><span title="9"><b>9</b></span></label>
+                                <input type="radio" id="form_question_q4_9" name="form[question_q4]" value="10" data-score="10">
+                                <label for="form_question_q4_9"><span title="10"><b>10</b></span></label>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="page-title">
+                  <div class="textevert">
+                    QUESTION 5
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="bloc bloc_blanc">
+                      <table class="table cellulecentrer"><tbody>
+                        <tr id="tr_q5">
+                          <td>
+                            <div class="form-group fondviolet  texteblanc title_question" id="q5">
+                              <label class="control-label">En vue d'améliorer en permanence le programme, avez-vous des suggestions à nous faire ?</label>
+                            </div>
+                            <div style="column-count:1;-moz-column-count: 1;">
+                              <div id="form_question_q5">
+                                <textarea id="form_question_q5" name="form[question_q5]" class="form-control" style="height:150px;text-align: left;"></textarea>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody></table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1 col-sm-1 col-xs-0">
+            </div>
+          </div>
+        </div>
+
+        <div class="row rowlogin">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-1 col-sm-1 col-xs-0"></div>
+            <div class="col-md-10 col-sm-10 col-xs-12" align="center">
+              <div id="submit_questionnaire_container">
+                <input type="submit" id="valider_questionnaire" name="valider_questionnaire" style="padding:15px !important;"
+                       value="{{ 'Valider les réponses de ce questionnaire'|trans }}" class="btn btn-lg btn-info"/>
+              </div>
+              <div class="logincarreorange  effacable"></div>
+            </div>
+            <div class="col-md-1 col-sm-1 col-xs-0" style="height:100px">
+              <div class="logincarrerose  effacable"></div>
+              <div class="logincarreviolet  effacable"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <br/>
+
+
+</div>
+
+
+{% endblock %}
+
+{% block app_javascript %}
+  {{ parent() }}
+  <script>
+    $(function(){
+      /*$('#update_rdv_update').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/coach/update',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            $('#valid_rdv .modal-text').html(result.message);
+            if (false === result.has_error) {
+              $('#valid_rdv .modal-text').addClass('text-success');
+            } else {
+              $('#valid_rdv .modal-text').addClass('text-danger');
+            }
+            $('#valid_rdv').modal('show');
+            $('#valid_rdv_close').click(function () {
+              $('#valid_rdv').modal('hide');
+              $('#valid_rdv .modal-text').html('');
+            });
+          }
+        });
+      });
+      $('#update_rdv_close').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/coach/del',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            $('#valid_rdv .modal-text').html(result.message);
+            if (false === result.has_error) {
+              $('#valid_rdv .modal-text').addClass('text-success');
+            } else {
+              $('#valid_rdv .modal-text').addClass('text-danger');
+            }
+            $('#valid_rdv').modal('show');
+            $('#valid_rdv_close').click(function () {
+              $('#valid_rdv').modal('hide');
+              $('#valid_rdv .modal-text').html('');
+            });
+          }
+        });
+      });
+      $('#update_rdv_submit').click(function(){
+        $.ajax({
+          url: (1 < document.location.href.split('_dev.php').length ? '/app_dev.php' : '') + '/coach/valid',
+          type: 'post',
+          processData: false,
+          contentType: false,
+          async: false,
+          cache: false,
+          success: function (result) {
+            $('#valid_rdv .modal-text').html(result.message);
+            if (false === result.has_error) {
+              $('#valid_rdv .modal-text').addClass('text-success');
+            } else {
+              $('#valid_rdv .modal-text').addClass('text-danger');
+            }
+            $('#valid_rdv').modal('show');
+            $('#valid_rdv_close').click(function () {
+              $('#valid_rdv').modal('hide');
+              $('#valid_rdv .modal-text').html('');
+            });
+          }
+        });
+      });*/
+
+      //Gère la possibilite de décocher une réponse.
+      // Mis ici pour éviter des problème d'affichage lors de la déselection
+      $("input[type='radio']").click(function () {
+        var previousValue = $(this).attr('previousValue');
+        var name = $(this).attr('id');
+
+        if (previousValue == 'checked') {
+          $(this).removeAttr('checked');
+          $(this).attr('previousValue', false);
+          $(this).trigger('change');
+        }
+        else {
+          $("input[id=" + name + "]:radio").attr('previousValue', false);
+          $(this).attr('previousValue', 'checked');
+        }
+      });
+
+    });
+  </script>
+{% endblock %}

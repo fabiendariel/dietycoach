@@ -1,0 +1,136 @@
+{% extends "AdminBundle::layout_admin.html.twig" %}
+
+{% block ocplatform_body %}
+
+    <link rel="stylesheet" href="{{ asset('bundles/plugins/fullcalendar/fullcalendar.css') }}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="{{ asset('bundles/plugins/fullcalendar/fullcalendar.js') }}"></script>
+    <script src="{{ asset('bundles/plugins/fullcalendar/fr.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {% block title %}
+                Coach
+            {% endblock %}
+        </h1>
+    </section>
+
+    <section class="content">
+
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Informations générales
+                </h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i></button>
+                </div>
+            </div>
+
+            <div class="box-body">
+                {{ form_start(form, {'attr': {'autocomplete': 'nope', 'class': 'form-horizontal', 'user_id': coach.id }}) }}
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                    {{ form_label(form.prenom, "Prénom", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.prenom) }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="col-sm-6">
+                    {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.nom) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                    {{ form_label(form.email, "Email", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control '}}) }}
+                    </div>
+                    <div class="col-sm-6">
+                    {{ form_label(form.mobile, "N° de téléphone mobile", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_errors(form.mobile) }}
+                    {{ form_widget(form.mobile, {'attr': {'class': 'form-control '}}) }}
+                    </div>
+                </div>
+
+
+                <div class="col-sm-12 text-center">
+                    <br/>
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-success'},  'label': button}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <br/><br/>
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Gestion des disponbilités
+                </h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+            </div>
+
+            <div class="box-body">
+                <div class="col-sm-12" id="calendar"></div>
+            </div>
+
+        </div>
+
+        <script>
+            $(function () {
+                main.init({{ dispoCoah|json_encode|raw }});
+            });
+        </script>
+    </section>
+
+    <!-- Gestion de créneau -->
+    <div class="modal fade" id="add_creneau" tabindex="-1" role="dialog">
+    </div>
+
+    <!-- Confirmation de déplacement de créneau -->
+    <div id="confirm_move" class="none"></div>
+
+    <!-- Confirmation de suppression de créneau -->
+    <div class="modal fade" id="confirm_del" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header textebleu">
+                    <button type="button" class="close fondgris" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ 'Supprimer un créneau de disponibilité'|trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form method="post" id="delete_creneau" enctype="multipart/form-data">
+                            <div class="row text-center margin-top-10"
+                                <label class="control-label">Confirmez-vous vouloir supprimer ce créneau de disponibilité du coach ?</label>
+                                <br/>
+                                <input id="id_creneau_del" name="id_creneau_del" type="hidden"/>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row text-center margin-top-20" id="submit_del_creneau_container">
+                        <br/>
+                        <button type="submit" id="submit_del_creneau" class="btn btn-sm btn-success">
+                            <i class="fa fa-floppy-o"></i> {{ 'Valider cette action'|trans }}
+                        </button>
+                        <button type="button" id="quitter_del_creneau" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash-o"></i> {{ 'Annuler'|trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

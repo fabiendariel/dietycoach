@@ -1,0 +1,135 @@
+{% extends "AdminBundle::layout_admin.html.twig" %}
+{% import 'AdminBundle:_Macros:app_pagination.html.twig' as pagination %}
+
+{% block ocplatform_body %}
+
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {% block title %}
+                Formulaire de génération de lot de codes d'accès
+            {% endblock %}
+        </h1>
+    </section>
+
+    <section class="content">
+
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                Demande
+            </h3>
+        </div>
+
+        <div class="box-body">
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-condensed">
+                        <tbody>
+                        <tr>
+                            <td align="right" class="col-lg-4" style="padding:20px;">
+                                Nombre de lots à générer (max 350 à la fois):
+                            </td>
+                            <td align="center" class="col-lg-4" style="padding:15px 0 10px;">
+                                {{ form_widget(form.nbLots, {'attr': {'class': 'form-control col-md-7'}}) }}
+                            </td>
+                            <td align="right" class="col-lg-4">
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" class="col-lg-4" style="padding:20px;">
+                                Date de préremption du premier code du lot :
+                            </td>
+                            <td align="center" class="col-lg-4" style="padding:15px 0 10px;">
+                                {{ form_widget(form.datePeremptionDebut, {'attr': {'class': 'form-control col-md-7'}}) }}
+                            </td>
+                            <td align="right" class="col-lg-4">
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" class="col-lg-4" style="padding:20px;">
+                                Date de préremption du dernier code du lot :
+                            </td>
+                            <td align="center" class="col-lg-4" style="padding:15px 0 10px;">
+                                {{ form_widget(form.datePeremptionFin, {'attr': {'class': 'form-control col-md-7'}}) }}
+                            </td>
+                            <td align="right" class="col-lg-4">
+                                &nbsp;
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="box-footer" style="text-align: center">
+                <a href="{{ path('app_admin_index') }}"><button type="button" class="btn btn-danger">Annuler</button></a>
+
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary','onSubmit':'$(this).attr(\'disabled\',\'disabled\');'},  'label': 'Générer les codes'}) }}
+                <div style="display:none;">{{ form_rest(form) }}</div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('#administration_code_acces_nbLots').attr('type','number');
+        });
+    </script>
+
+    {% if liste_groupes is not null %}
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    Liste des codes
+                </h3>
+                <div class="box-tools pull-right">
+                    <a href="{{ path('app_administration_codes_generate') }}">
+                        <button type="button" class="btn btn-success">Extraire au format Excel</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="box-footer" style="text-align: center">
+
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <td align="center" class="col-lg-3" style="border:1px solid #000;padding:20px;">Lot</td>
+                                <td align="center" class="col-lg-3" style="border:1px solid #000;border-left:0;padding:20px;">Code 1</td>
+                                <td align="center" class="col-lg-3" style="border:1px solid #000;border-left:0;padding:20px;">Code 2</td>
+                                <td align="center" class="col-lg-3" style="border:1px solid #000;border-left:0;padding:20px;">Code 3</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for groupe in liste_groupes %}
+                            <tr>
+                                <td align="center" class="col-lg-3" style="padding:20px;">
+                                    {{ groupe.detail.group_id }}
+                                </td>
+                                {% for code in groupe.detail.codes %}
+                                <td align="center" class="col-lg-3" style="padding:20px;">
+                                    {{ code }}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
